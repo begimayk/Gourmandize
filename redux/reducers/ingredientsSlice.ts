@@ -18,7 +18,6 @@ export const fetchIngredients = createAsyncThunk(
     async (id: number)=> {
         const URL = `https://api.spoonacular.com/recipes/${id}/ingredientWidget.json?apiKey=af2ea962f26f47f09195b2cb1f99ff67`;
         const response =  await axios.get<Ingredients>(URL)
-    console.log(response.data);
     return response.data;
     }
 )

@@ -26,16 +26,14 @@ const favoritesSlice = createSlice( {
             }
             console.log((action.payload.title))
             state.data = state.data.filter(recipe => {
-                console.log(recipe.title)
                 recipe.title!=action.payload.title
             });
-            console.log(state.data)
-        }
+        },
     }
 })
 
-const {addRecipe, removeRecipe} = favoritesSlice.actions
+const {addRecipe, removeRecipe, isInFavorites} = favoritesSlice.actions
 
-export {addRecipe, removeRecipe};
+export {addRecipe, removeRecipe, isInFavorites };
 
 export default favoritesSlice.reducer;

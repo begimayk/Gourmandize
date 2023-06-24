@@ -26,8 +26,6 @@ export const fetchRecipes = createAsyncThunk(
         const response =  await axios.get<Recipes>(
             URL+`&query=${recipesSearch.query}&cuisine=${recipesSearch.cuisine}&diet=${recipesSearch.diet}`,
         );
-
-        console.log(response.data);
         return response.data;
     }
 )

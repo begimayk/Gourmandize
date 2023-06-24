@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     View,
     Text,
@@ -6,7 +6,6 @@ import {
     Image,
     StyleSheet,
     ScrollView,
-    Pressable,
     TouchableOpacity,
     Button
 } from "react-native";
@@ -25,13 +24,15 @@ export const RecipeScreen = ({navigation}: {navigation: any}) => {
 
     const ingredients: any = useSelector((state: IngredientsState) => state);
 
-    const dispatch = useAppDispatch();
     const favorites: any = useSelector((state: FavoritesRecipesState) => state);
+    const dispatch = useAppDispatch();
 
-    console.log("favs?", favorites.favorites?.data);
-    console.log("is recipe fav?",isRecipePresent(chosenRecipeTest.recipe?.data, favorites.favorites?.data))
-    const [isFavorite, setFavorite] = useState(() => isRecipePresent(chosenRecipeTest.recipe?.data, favorites.favorites?.data));
-    console.log(isFavorite)
+
+    const [isFavorite, setFavorite] = useState(null);
+
+    useEffect(() => {
+        setFavorite(isRecipePresent(chosenRecipeTest.recipe?.data, favorites.favorites?.data))
+    });
     const toggleFavorite = () => {
         if(isFavorite){
             setFavorite(false)
@@ -50,9 +51,9 @@ export const RecipeScreen = ({navigation}: {navigation: any}) => {
                 <Text style={styles.title}> {chosenRecipeTest.recipe?.data?.title}</Text>
             </View>
                 <TouchableOpacity onPress={() => toggleFavorite()}>
-                <MaterialIcons style={styles.favoriteIcon} name={isFavorite? 'star': 'star-border'}></MaterialIcons>
+                <MaterialIcons style={isFavorite? styles.favoriteIcon: styles.notFavorite} name={isFavorite? 'star': 'star-border'}></MaterialIcons>
                 </TouchableOpacity>
-                <View style={styles.openFavs}><Button  title="Go to favorites"
+                <View ><Button  title="Go to favorites"
                 onPress={() => navigation.navigate('Favorites')}/></View>
             <View>
                 <Text style={styles.header}> Ingredients you will need </Text>
@@ -62,8 +63,9 @@ export const RecipeScreen = ({navigation}: {navigation: any}) => {
                    </View>
                 ))}
             </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
-                    <Text style={styles.buttonText}>Home</Text>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Results')
+                                                                        }>
+                    <Text style={styles.buttonText}>Go back</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -72,6 +74,12 @@ export const RecipeScreen = ({navigation}: {navigation: any}) => {
 
 const styles = StyleSheet.create({
     favoriteIcon: {
+        alignSelf: "center",
+        fontSize: 36,
+        marginBottom: 0,
+        color: "#FFD700"
+    },
+    notFavorite: {
         alignSelf: "center",
         fontSize: 36,
         marginBottom: 0

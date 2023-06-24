@@ -20,8 +20,6 @@ const chosenRecipeSlice = createSlice({
         setRecipe(state: RecipeState, action: PayloadAction<Recipe>){
             state.set = true;
             state.data = action.payload;
-            console.log("from slice")
-            console.log(action.payload)
         }
     }
 })

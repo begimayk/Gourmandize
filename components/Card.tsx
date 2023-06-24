@@ -23,9 +23,7 @@ export function Card({recipe, navigation}: {recipe: Recipe, navigation}) {
     const click = async (recipe: Recipe) => {
         dispatch(setRecipe(recipe));
         dispatch(fetchIngredients(recipe.id));
-        console.log("from card", chosenRecipeTest.recipe);
     }
-    const chosenRecipeTest: any = useSelector((state: RecipeState) => state);
     return (
 
             <TouchableOpacity style={styles.cardContainer} onPress={() => {
@@ -43,7 +41,7 @@ export function Card({recipe, navigation}: {recipe: Recipe, navigation}) {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        backgroundColor : "#FFF",
+        backgroundColor : "#fff",
         borderRadius: 20,
         borderWidth : 1,
         borderColor: "#C0C0C0",

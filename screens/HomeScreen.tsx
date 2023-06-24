@@ -1,8 +1,6 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React from 'react';
 import {
-    Button,
     Image,
-    ImageBackground, Pressable,
     SafeAreaView,
     ScrollView,
     StyleSheet,
@@ -37,23 +35,17 @@ export const HomeScreen = () => {
             {/*First section*/}
             <View style={styles.firstSection}><Image style={styles.logo} source={require("../assets/icon.png")}/>
                 <Text style={styles.gourmandize}>Gourmandize</Text>
-                <TouchableOpacity style={styles.favorites} onPress={() => navigation.navigate('Favorites')}>
-                    <Text style={styles.favoritesText}>
-                        My favorites
-                    </Text>
-                    <MaterialIcons style={styles.star} name='star' size={18}></MaterialIcons>
-                </TouchableOpacity>
 
             </View>
             <TextInputExample
                 onSearch={(query, cuisine, diet) => {
                     search(query, cuisine, diet);
                     navigation.navigate('Results');
-                    console.log("FROM HOME", recipes.recipes?.data?.results)
                 }}
             />
 
         </SafeAreaView>
+
     )
 }
 
@@ -62,21 +54,6 @@ const styles = StyleSheet.create(
     {
         background: {
             flex : 1,
-        },
-        favorites: {
-            marginTop: 20,
-            marginRight:  5,
-            paddingRight: 5,
-            backgroundColor: "#FFFFE0",
-            borderRadius: 30,
-            borderColor: "#FFD700",
-            borderWidth: 1,
-        },
-        favoritesText: {
-            fontSize: 16,
-            margin: 10,
-            marginBottom: 5,
-            fontWeight: "300",
         },
         gourmandize : {
             fontWeight : "400",
@@ -95,12 +72,12 @@ const styles = StyleSheet.create(
         },
         container: {
             marginHorizontal: 40,
-            marginTop: 30,
+            marginTop: 100,
         },
         input: {
             backgroundColor: '#FFF',
             height: 40,
-            margin: 14,
+            margin: 20,
             padding: 5,
             borderRadius: 10,
             fontSize : 24,
@@ -130,10 +107,10 @@ const styles = StyleSheet.create(
             color: "#40826D"
         },
         dropdown2BtnStyle: {
-            width: '93%',
+            width: '80%',
             alignContent : "center",
             height: 40,
-            margin: 10,
+            margin: 30,
             padding: 10,
             backgroundColor: '#FFF',
             borderRadius: 10,
@@ -214,7 +191,6 @@ const TextInputExample = (props) => {
                     data={diets}
                     onSelect={(selectedItem, index) => {
                         onChangeDiet(selectedItem);
-                        console.log(index);
                     }}
                 />
                 <View>
@@ -228,27 +204,3 @@ const TextInputExample = (props) => {
     );
 };
 
-// async function search(
-//     query,
-//     cuisine,
-//     diet
-// ){
-//     dispatch(fetchRecipes({query, cuisine, diet}));
-//
-//
-//     const dispatch = useAppDispatch();
-//     const {data, loading} = useAppSelector((state) => state.recipes);
-//
-//     useEffect(() => {
-//         if(!data){
-//             dispatch(fetchRecipes({query, cuisine, diet}));
-//         }
-//     })
-//     //getRecipes(query, cuisine, diet).then(e => {
-//       //  setRecipes(e.data.results)
-//     //})
-//     return {
-//         data,
-//         loading
-//     }
-// }
